@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { validateUser, validatePartialUser } from '../schema/users';
 import UserModel from '../models/userModel';
+import dotenv from 'dotenv';
+dotenv.config()
 
 export class UserController {
 
@@ -24,9 +26,6 @@ export class UserController {
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
         }
-
-
-
 
         res.status(201).json({ message: 'User registered successfully' });
     }
@@ -71,15 +70,19 @@ export class UserController {
             return res.status(500).json({ error: 'Internal server error' });
         }
     }
-
-    static async deleteUser(req, res) {
-        const { id } = req.params
-        const result = await UserModel.delete({ id })
-        if (result === false) {
-            return res.status(404).json({ message: 'User not found' })
+    static async deleteUser(req, res) { 
+        const { id } = req.params;
+        try {
+            const user = await UserModel.getUserById(id);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            await UserModel.deleteUser(id);
+            res.status(200).json({ message: 'User deleted successfully' });
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            res.status(500).json({ error: 'Internal server error' });
         }
-
-        return res.json({ message: 'User deleted' })
     }
 
 }

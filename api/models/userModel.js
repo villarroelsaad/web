@@ -1,11 +1,19 @@
-
+import { connection } from "../config";
 export class UserModel {
-    static async register({ input, hashedPassword }) {
-        const newUser = {
-            username: input.username,
-            email: input.email,
-            password: hashedPassword,
+
+    static async login({ input }) {
+        const { username } = input
+        const [userRows] = await connection.execute('SELECT UserID, UserName, UserPassword FROM Users WHERE Username = ?', [username])
+        return [userRows]
         }
-        // Save in DB
+
+    static async register({ input }) {
+        const { username, email, hashedPassword } = input
+        await connection.execute('insert into Users (Username, Email,UserPassword) values (?,?,?);', [username, email, hashedPassword])
+        return true
+    }
+    static async deleteUser({ id }) {
+        const [userRows] = await connection.execute('DELETE FROM Users WHERE UserID = ?', [id])
+        return [userRows]
     }
 }
