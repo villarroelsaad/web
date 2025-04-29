@@ -14,27 +14,24 @@ export const Paypal = () => {
           id="search"
           placeholder="Nombre, fecha o correo o id paypal"
         />
-        {
-      
-          (ipnData = [] ? (
-            <></>
-          ) : (
-            <table className="w-full p-3 text-sm text-left  dark:text-gray-400">
-              <thead>
-                <tr>
-                  <th>Orden</th>
-                  <th>Fecha</th>
-                  <th>Nombre</th>
-                  <th>ID PayPal</th>
-                  <th>Montos</th>
-                  <th>Correo</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody id="data-body">{/* Fetch */}</tbody>
-            </table>
-          ))
-        }
+        {ipnData ? (
+          <h1>No se encuentran datos disponibles</h1>
+        ) : (
+          <table className="w-full p-3 text-sm text-left  dark:text-gray-400">
+            <thead>
+              <tr>
+                <th>Orden</th>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>ID PayPal</th>
+                <th>Montos</th>
+                <th>Correo</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="data-body">{/* Fetch */}</tbody>
+          </table>
+        )}
 
         <div className="flex gap-4 mt-5">
           <button className="p-1 rounded">

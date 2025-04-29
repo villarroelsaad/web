@@ -5,8 +5,7 @@ export class PayController {
 
 
     static async paypalIpn(req, res) {
-        // Immediately respond with 200 OK to acknowledge receipt
-        const PAYPAL_EMAIL = 'your_paypal_email@example.com';
+
         res.sendStatus(200);
 
         ipn.verify(req.body, async (err, msg) => {
@@ -21,17 +20,11 @@ export class PayController {
 
                 const paymentStatus = req.body.payment_status;
                 const txnId = req.body.txn_id;
-                const receiverEmail = req.body.receiver_email;
                 const mcGross = req.body.mc_gross;
-                const mcCurrency = req.body.mc_currency;
                 const paymentDate = req.body.payment_date;
                 const name = req.body.first_name + ' ' + req.body.last_name;
 
-                // --- Security Checks (Crucial in a real application) ---
-                if (receiverEmail !== PAYPAL_EMAIL) {
-                    console.warn('IPN Warning: Receiver email mismatch:', receiverEmail);
-                    return; // Do not process further
-                }
+
 
                 // --- Idempotency Check (Crucial in a real application) ---
                 const alreadyProcessed = await PayModel.checkTransactionProcessed(txnId);
@@ -48,20 +41,11 @@ export class PayController {
                         payerName: name,
                         payerEmail: req.body.payer_email,
                         amount: mcGross,
-                        currency: mcCurrency,
                         status: paymentStatus
 
                         // Add other relevant details from req.body
                     };
                     await PayModel.processSuccessfulPayment(paymentDetails);
-                    // In a real app, you'd update your database here
-                } else if (paymentStatus === 'Refunded') {
-                    const refundDetails = {
-                        txnId: txnId,
-                        refundAmount: req.body.refund_amount,
-                        currencyCode: req.body.currency_code,
-                    };
-                    await PayModel.processRefund(refundDetails);
                     // In a real app, you'd update your database here
                 } else if (paymentStatus === 'Pending') {
                     console.warn('IPN: Payment Pending:', req.body.pending_reason);
