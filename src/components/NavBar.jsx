@@ -1,5 +1,7 @@
-import { useState, useRef } from "react";
-import { Link } from "react-router-dom"
+import { useState, useRef, useContext } from "react";
+import { UserContext } from "../services/context";
+import { LogOut } from "../services/logOut";
+import { Link, Navigate } from "react-router-dom";
 import useClickOutside from "../hooks/useNavBar";
 import { FaPaypal } from "react-icons/fa";
 import { DiAptana } from "react-icons/di";
@@ -9,17 +11,29 @@ import {
   HiPower,
   HiMiniShoppingCart,
   HiUsers,
-   HiChevronDown,
-   HiOutlineBars3,
+  HiChevronDown,
+  HiOutlineBars3,
 } from "react-icons/hi2";
 
 export const NabBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [nav, setNav] = useState(false);
   const menuRef = useRef(null);
+  const { user } = useContext(UserContext);
 
   const toggleNav = () => {
     setNav(!nav);
+  };
+
+  const handleLogout = async () => {
+    if (window.confirm("¿Estás seguro de que quieres cerrar sesión?")) {
+      try {
+        await LogOut();
+        Navigate("/");
+      } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+      }
+    }
   };
 
   useClickOutside(menuRef, () => {
@@ -53,7 +67,7 @@ export const NabBar = () => {
           <ul className="space-y-4 font-medium">
             <li>
               <Link
-                to="/"
+                to="/home"
                 className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 "
               >
                 <HiChartPie size={22} />
@@ -62,11 +76,11 @@ export const NabBar = () => {
             </li>
             <li>
               <Link
-                to="/sales"
+                to="/home/sales"
                 className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
               >
                 <HiMiniShoppingCart size={22} />
-                <span className="flex-1 ms-3 whitespace-nowrap">Sales</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Ventas</span>
               </Link>
             </li>
             <li>
@@ -93,7 +107,7 @@ export const NabBar = () => {
                 <HiChevronDown size={20} />
               </button>
               {isOpen && (
-                <ul id="clients" className="py-2 space-y-2 ">
+                <ul id="/home/clients" className="py-2 space-y-2 ">
                   <li>
                     <a
                       href="#"
@@ -110,20 +124,12 @@ export const NabBar = () => {
                       2
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="flex items-center w-full p-3 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    >
-                      3
-                    </a>
-                  </li>
                 </ul>
               )}
             </li>
             <li>
               <Link
-                to="/paypal"
+                to="/home/paypal"
                 className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
               >
                 <FaPaypal size={22} />
@@ -133,20 +139,22 @@ export const NabBar = () => {
                 </span>
               </Link>
             </li>
+            {user.role === "admin" && (
+              <li>
+                <Link
+                  to="/home/config"
+                  className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
+                >
+                  <DiAptana size={22} />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Configuracion
+                  </span>
+                </Link>
+              </li>
+            )}
             <li>
               <a
-                href="#"
-                className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
-              >
-                <DiAptana size={22} />
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Configuracion
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
+                onClick={handleLogout}
                 className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
               >
                 <HiPower size={22} />

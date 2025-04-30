@@ -84,5 +84,23 @@ export class UserController {
             res.status(500).json({ error: 'Internal server error' });
         }
     }
+    static async editUser(req, res) {
+        const { id } = req.params;
+        const result = validatePartialUser(req.body);
+        try {
+            if (!result.success) {
+                return res.status(400).json({ error: JSON.parse(result.error.message) });
+            }
+            const user = await UserModel.getUserById(id);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            await UserModel.editUser(id, result.data);
+            res.status(200).json({ message: 'User updated successfully' });
+        } catch (error) {
+            console.error('Error updating user:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    }
 
 }
