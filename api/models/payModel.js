@@ -1,27 +1,27 @@
-import { connection } from '../config.js'; // Adjust the path as necessary
+import { connection } from "../config";
 
 export class PayModel {
     
-    // Function to simulate checking if a transaction has already been processed
+
   static async checkTransactionProcessed(txnId) {
-  // In a real application, you would query your database here
+
     const id = txnId;
-    const [check] = await connection.execute('SELECT * WHERE Id = ?', [id])
+    const [check] = await connection.execute('SELECT * from Ipn WHERE Id_i = ?', [id])
     if (check[0].length > 0) {
-      return false; // Replace with your database lookup
+      return false; 
     }
   }
       
-      // Function to simulate processing a successful payment
+
       static async processSuccessfulPayment({paymentDetails}) {
         const { txnId, paymentDate, payerName, payerEmail, amount, status } = paymentDetails;
-        await connection.execute('INSERT INTO Payments (TxnId, PaymentDate, PayerName, PayerEmail, Amount, ) VALUES (?, ?, ?, ?, ?, ?)', [txnId, paymentDate, payerName, payerEmail, amount, status]);
+        await connection.execute('INSERT INTO Payments (Id.i, PayerName_i,PayerEmail_i,PaymentDate_i,   Amount_i,Status_i ) VALUES (?, ?, ?, ?, ?, ?)', [txnId, paymentDate, payerName, payerEmail, amount, status]);
 
       }
       
-      // Function to simulate processing a refund
+
   static async getIpnData() {
-    const [ipnData] = await connection.execute('SELECT * FROM Payments WHERE status = "Completed"');
-    return ipnData; // Assuming you want to return the first row of data
+    const [ipnData] = await connection.execute('SELECT * FROM Ipn WHERE status_i = "Completed"');
+    return ipnData; 
   }
 }

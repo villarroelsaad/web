@@ -3,7 +3,7 @@ export class UserModel {
 
     static async login({ input }) {
         const { username } = input
-        const [userRows] = await connection.execute('SELECT UserID, UserName, UserPassword FROM Users WHERE Username = ?', [username])
+        const [userRows] = await connection.execute('SELECT UserID, UserName, UserPassword, role FROM Users WHERE Username = ?', [username])
         return [userRows]
         }
 
@@ -15,5 +15,10 @@ export class UserModel {
     static async deleteUser({ id }) {
         const [userRows] = await connection.execute('DELETE FROM Users WHERE UserID = ?', [id])
         return [userRows]
+    }
+    static async editUser({ id, input }) {
+        const { username, email, role } = input
+        await connection.execute('UPDATE Users SET Username = ?, Email = ?, role = ? WHERE UserID = ?', [username, email, role, id])
+        return true
     }
 }

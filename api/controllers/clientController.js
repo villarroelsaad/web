@@ -1,9 +1,9 @@
 import { ClientModel } from '../models/clientModel.js';
 
 export class ClientsController {
-    static async getClient(req, res) {
+    static async getClients(req, res) {
         try {
-            const Clients = await ClientModel.getAllClient();
+            const Clients = await ClientModel.getAllClients();
             res.status(200).json(Clients);
         } catch (error) {
             console.error('Error fetching Client:', error);
@@ -26,14 +26,14 @@ export class ClientsController {
             res.status(500).json({ error: 'Internal server error' });
         }
     }
-    static async deleteSale(req, res) {
+    static async deleteClient(req, res) {
         const { id } = req.params;
         try {
-            const sale = await ClientModel.getSaleById(id);
+            const sale = await ClientModel.getClientById(id);
             if (!sale) {
                 return res.status(404).json({ message: 'Sale not found' });
             }
-            await ClientModel.deleteSale(id);
+            await ClientModel.deleteClient(id);
             res.status(200).json({ message: 'Sale deleted successfully' });
         } catch (error) {
             console.error('Error deleting sale:', error);
