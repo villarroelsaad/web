@@ -1,9 +1,9 @@
-import { SalesModel } from '../models/sales.Model.js';
+import { SalesModel } from '../models/salesModel.js';
 
 export class SalesController {
     static async getSales(req, res) {
         try {
-            const sales = await SalesModel.getAllSales();
+            const sales = await SalesModel.getSales();
             res.status(200).json(sales);
         } catch (error) {
             console.error('Error fetching sales:', error);

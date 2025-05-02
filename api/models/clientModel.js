@@ -1,9 +1,10 @@
-import { connection } from "../config";
-export class ClientsModel {
+import { connection } from "../config.js";
+
+export class ClientModel {
     
     // Function to simulate checking if a transaction has already been processed
     static async getClients() {
-        const [clients] = await connection.execute('SELECT * FROM Cliens');
+      const [clients] = await connection.execute('SELECT * FROM Clients');
         return clients; 
     }
       

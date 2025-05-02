@@ -18,6 +18,7 @@ export class PayController {
             if (msg === 'VERIFIED') {
                 console.log('IPN VERIFIED:', req.body);
 
+                const id = UUID(); 
                 const paymentStatus = req.body.payment_status;
                 const txnId = req.body.txn_id;
                 const mcGross = req.body.mc_gross;
@@ -36,6 +37,7 @@ export class PayController {
                 // --- Process Based on Payment Status ---
                 if (paymentStatus === 'Completed') {
                     const paymentDetails = {
+                        id: id,
                         txnId: txnId,
                         paymentDate: paymentDate,
                         payerName: name,
