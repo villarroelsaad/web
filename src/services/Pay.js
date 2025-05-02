@@ -1,5 +1,5 @@
 export const getPaypalIpn = async () => {
-    const response = await fetch('http://localhost:3000/get-ipn', {
+    const response = await fetch('http://localhost:3000/pay/get-ipn', {
         method: 'GET',
         headers: {
         'Content-Type': 'application/json',

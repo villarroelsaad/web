@@ -1,6 +1,6 @@
 export const ULogin = async (username, password) => {
     try {
-      const response = await fetch('localhost:3000/login', {
+      const response = await fetch('localhost:3000/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

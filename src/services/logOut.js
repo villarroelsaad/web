@@ -1,6 +1,6 @@
 export const LogOut = async () => {
     try {
-      const response = await fetch('localhost:3000/logout', {
+      const response = await fetch('localhost:3000/user/logout', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

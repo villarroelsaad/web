@@ -3,7 +3,7 @@ import { ClientModel } from '../models/clientModel.js';
 export class ClientsController {
     static async getClients(req, res) {
         try {
-            const Clients = await ClientModel.getAllClients();
+            const Clients = await ClientModel.getClients();
             res.status(200).json(Clients);
         } catch (error) {
             console.error('Error fetching Client:', error);

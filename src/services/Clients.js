@@ -1,5 +1,5 @@
-export const getSales = async () => {
-    const response = await fetch('http://localhost:3000/sales/get', {
+export const GetClients = async () => {
+    const response = await fetch('http://localhost:3000/clients/get', {
         method: 'GET',
         headers: {
         'Content-Type': 'application/json',

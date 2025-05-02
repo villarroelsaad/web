@@ -1,11 +1,23 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { validateUser, validatePartialUser } from '../schema/users';
-import UserModel from '../models/userModel';
+import { validateUser, validatePartialUser } from '../schema/users.js';
+import { UserModel } from '../models/userModel.js';
 import dotenv from 'dotenv';
 dotenv.config()
 
 export class UserController {
+
+    static async getUsers(req, res) {
+        try {
+            const users = await UserModel.getUsers();
+            res.status(200).json(users);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+
+
 
     static async register(req, res) {
         // Validate the request body against the schema
