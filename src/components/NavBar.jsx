@@ -11,12 +11,10 @@ import {
   HiPower,
   HiMiniShoppingCart,
   HiUsers,
-  HiChevronDown,
   HiOutlineBars3,
 } from "react-icons/hi2";
 
 export const NabBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [nav, setNav] = useState(false);
   const menuRef = useRef(null);
   const { user } = useContext(UserContext);
@@ -39,10 +37,6 @@ export const NabBar = () => {
   useClickOutside(menuRef, () => {
     setNav(false);
   });
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <nav>
@@ -93,39 +87,15 @@ export const NabBar = () => {
               </a>
             </li>
             <li>
-              <button
-                type="button"
-                className="flex items-center w-full p-3 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                aria-controls="dropdown-clients"
-                data-collapse-toggle="dropdown-clients"
-                onClick={toggleDropdown}
+              <Link
+                to="/home/clients"
+                className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
               >
                 <HiUsers size={22} />
                 <span className="flex-1 ms-3 text-left whitespace-nowrap">
                   Clientes
                 </span>
-                <HiChevronDown size={20} />
-              </button>
-              {isOpen && (
-                <ul id="/home/clients" className="py-2 space-y-2 ">
-                  <li>
-                    <a
-                      href="#"
-                      className="flex items-center w-full p-3 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    >
-                      1
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="flex items-center w-full p-3 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    >
-                      2
-                    </a>
-                  </li>
-                </ul>
-              )}
+              </Link>
             </li>
             <li>
               <Link
