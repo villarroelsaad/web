@@ -1,6 +1,6 @@
-export const EditU = async (username, email, role, id) => {
+export const EditClient = async (username, email, role, id) => {
     try {
-      const response = await fetch(`localhost/3000/user/edit/${id}`, {
+      const response = await fetch(`localhost/3000/client/edit/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
