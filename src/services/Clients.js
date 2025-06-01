@@ -1,4 +1,4 @@
-export const GetClients = async () => {
+export const getClients = async () => {
     const response = await fetch('http://localhost:3000/clients/get', {
         method: 'GET',
         headers: {

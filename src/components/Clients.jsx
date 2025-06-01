@@ -1,9 +1,9 @@
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useState, useEffect } from "react";
 import { getClients } from "../services/Clients";
-import ClientDelete from "../services/ClientDelete";
+import { ClientDelete } from "../services/ClientDelete";
 import useModalForm from "../hooks/useEditClient";
-import EditClient from "../services/EditClient";
+import { EditClient } from "../services/EditClient";
 
 export const Clients = () => {
   const [Clients, setClients] = useState([]);
@@ -21,12 +21,11 @@ export const Clients = () => {
     fetchData();
   }, []);
 
-  const { openModal, ModalForm } = useModalForm(null, handleEditClient);
-
   const handleEditClient = (id, name, email) => {
     EditClient(id, name, email);
     alert("Cliente editado correctamente");
   };
+  const { openModal, ModalForm } = useModalForm(null, handleEditClient);
 
   const handleEliminate = (id) => {
     ClientDelete(id);
@@ -37,7 +36,7 @@ export const Clients = () => {
   return (
     <div className=" mx-auto bg-white dark:bg-[#27272a] sm:w-3/4 w-full h-full flex justify-center">
       <section className="flex flex-col gap-4 text-lg text-gray-800 items-center justify-center w-full h-full rounded-lg shadow-sm p-10 dark:text-gray-200 dark:shadow-md dark:shadow-gray-800">
-        <h1 className="text-xl font-semibold">Ventas</h1>
+        <h1 className="text-xl font-semibold">Clientes</h1>
 
         {Clients ? (
           <h1>No se encuentran Clientes disponibles</h1>
