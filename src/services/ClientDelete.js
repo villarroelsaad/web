@@ -1,4 +1,4 @@
-export const DeleteU = async (id) => {
+export const ClientDelete = async (id) => {
     try {
       const response = await fetch(`localhost/3000/client/delete/${id}`, {
         method: 'Delete',
