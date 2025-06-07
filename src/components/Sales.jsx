@@ -10,7 +10,6 @@ export const Sales = () => {
       try {
         const data = await getSales();
         setIpnData(data);
-        console.log("hola");
       } catch (err) {
         console.log(err);
       }
@@ -42,13 +41,13 @@ export const Sales = () => {
               {ipnData.map((ipn) => {
                 return (
                   <tr key={ipn.id}>
-                    <td>{ipn.orden}</td>
-                    <td>{ipn.fecha}</td>
-                    <td>{ipn.nombre}</td>
+                    <td>{ipn.id}</td>
+                    <td>{ipn.date}</td>
+                    <td>{ipn.name}</td>
                     <td>{ipn.idPaypal}</td>
-                    <td>{ipn.montos}</td>
-                    <td>{ipn.correo}</td>
-                    <td>{ipn.estado}</td>
+                    <td>{ipn.amount}</td>
+                    <td>{ipn.email}</td>
+                    <td>{ipn.status}</td>
                   </tr>
                 );
               })}

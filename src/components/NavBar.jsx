@@ -1,7 +1,7 @@
 import { useState, useRef, useContext } from "react";
 import { UserContext } from "../services/context";
 import { LogOut } from "../services/logOut";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useClickOutside from "../hooks/useNavBar";
 import { FaPaypal } from "react-icons/fa";
 import { DiAptana } from "react-icons/di";
@@ -23,11 +23,11 @@ export const NabBar = () => {
     setNav(!nav);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     if (window.confirm("¿Estás seguro de que quieres cerrar sesión?")) {
       try {
-        await LogOut();
-        Navigate("/");
+        LogOut();
+        useNavigate("/");
       } catch (error) {
         console.error("Error al cerrar sesión:", error);
       }

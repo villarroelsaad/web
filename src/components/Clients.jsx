@@ -6,14 +6,13 @@ import useModalForm from "../hooks/useEditClient";
 import { EditClient } from "../services/EditClient";
 
 export const Clients = () => {
-  const [Clients, setClients] = useState([]);
+  const [clients, setClients] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getClients();
         setClients(data);
-        console.log("hola");
       } catch (err) {
         console.log(err);
       }
@@ -38,7 +37,7 @@ export const Clients = () => {
       <section className="flex flex-col gap-4 text-lg text-gray-800 items-center justify-center w-full h-full rounded-lg shadow-sm p-10 dark:text-gray-200 dark:shadow-md dark:shadow-gray-800">
         <h1 className="text-xl font-semibold">Clientes</h1>
 
-        {Clients ? (
+        {clients ? (
           <h1>No se encuentran Clientes disponibles</h1>
         ) : (
           <table className="w-full p-3 text-sm text-left  dark:text-gray-400">
@@ -50,7 +49,7 @@ export const Clients = () => {
               </tr>
             </thead>
             <tbody id="data-body">
-              {Clients.map((client) => {
+              {clients.map((client) => {
                 return (
                   <>
                     <tr key={client.id}>

@@ -19,7 +19,7 @@ export const Login = () => {
       setUser(user);
       setUserName("");
       setPassword("");
-      console.log(user.authUser.Username);
+      console.log(user.Username);
       return navigate("/");
     } catch (err) {
       setUserName("");
