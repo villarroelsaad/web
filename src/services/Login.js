@@ -14,7 +14,13 @@ export const ULogin = async (username, password) => {
       }
   
       const user = await response.json()
-      return user
+      const data = user.map(user => ({
+        id: user.ID_u,
+        userName: user.Username_u,
+        email: user.Email_u,
+        role: user.Role_u
+      }));
+      return data
     } catch (err) {
       console.error('Fetch error:', err)
       throw new Error('Failed to login')

@@ -33,7 +33,6 @@ export const Config = () => {
       try {
         const data = await GetUsers();
         setUser(data);
-        console.log("hola");
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +45,6 @@ export const Config = () => {
         <thead>
           <tr>
             <th>Usuario</th>
-            <th>Contrasena</th>
             <th>Correo</th>
             <th>Role</th>
           </tr>
@@ -55,10 +53,9 @@ export const Config = () => {
           {user.map((u) => {
             return (
               <>
-                <tr key={u.userId}>
-                  <td>{u.UserName}</td>
-                  <td>{u.UserPassword}</td>
-                  <td>{u.Email}</td>
+                <tr key={u.id}>
+                  <td>{u.userName}</td>
+                  <td>{u.email}</td>
                   <td>{u.role}</td>
                   <button
                     onClick={openModal(u)}
@@ -68,7 +65,7 @@ export const Config = () => {
                     <HiMiniAdjustmentsHorizontal />
                   </button>
                   <button
-                    onClick={() => handleDelete(u.userId)}
+                    onClick={() => handleDelete(u.id)}
                     type="button"
                     className="bg-sky-400  mt-7 w-28 p-2 self-center text-center rounded-lg font-semibold active:opacity-85  hover:bg-sky-300 transition-all dark:bg-sky-600 dark:hover:bg-opacity-90"
                   >

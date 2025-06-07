@@ -10,7 +10,6 @@ export const Paypal = () => {
       try {
         const data = await getPaypalIpn();
         setIpnData(data);
-        console.log("hola");
       } catch (err) {
         console.log(err);
       }
