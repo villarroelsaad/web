@@ -72,12 +72,12 @@ export const Config = () => {
                     <HiArchiveBoxXMark />
                   </button>
                 </tr>
-                <ModalForm handleEditUser={handleEditUser} />
               </>
             );
           })}
         </tbody>
       </table>
+      <ModalForm handleEditUser={handleEditUser} />
     </div>
   );
 };

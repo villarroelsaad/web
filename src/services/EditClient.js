@@ -1,11 +1,11 @@
-export const EditClient = async (username, email, role, id) => {
+export const EditClient = async (id, username, email) => {
     try {
-      const response = await fetch(`localhost/3000/client/edit/${id}`, {
+      const response = await fetch(`http://localhost/3000/client/edit/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email,role })
+        body: JSON.stringify({ username, email })
       })
   
       if (!response.ok) {
