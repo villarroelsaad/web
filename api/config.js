@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const allowedOrigins = ['https://acortador-links-front.vercel.app']
+const allowedOrigins = ['http://localhost:5173']
 export const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {

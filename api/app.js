@@ -8,7 +8,7 @@ import { routerUser } from './routes/rUser.js'
 import { routerSale } from './routes/rSales.js';
 import { routerPay } from './routes/rPay.js'
 import { routerClient } from './routes/rClient.js'
-
+import { corsOptions } from './config.js';
 
 dotenv.config();
 const port = 3000;
@@ -18,7 +18,7 @@ const app = express();
 app.disable('x-powered-by')
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors('*'))
+app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session)
 

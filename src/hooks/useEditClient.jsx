@@ -30,10 +30,10 @@ const useModalForm = (initialClient, handleEditClient) => {
         <form
           id={client.id}
           method="dialog"
-          className="p-8 border border-sky-500 dark:bg-[#27272a] text-gray-800 dark:text-gray-200 rounded-md shadow-lg "
+          className="p-11 border border-sky-500 dark:bg-[#27272a] text-gray-800 dark:text-gray-300 rounded-md shadow-lg "
         >
-          <h2 className="text-lg font-semibold mb-4">Editar Cliente</h2>
-          <label className="block mb-2">
+          <h2 className="text-xl font-bold mb-6">Editar Cliente</h2>
+          <label className="block text-base font-bold mb-3">
             Nombre:
             <input
               type="text"
@@ -41,10 +41,10 @@ const useModalForm = (initialClient, handleEditClient) => {
               autoComplete="name"
               defaultValue={client.name}
               onChange={handleChange}
-              className="w-full p-1 pl-2 border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-200 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
+              className="w-full p-1 pl-2  font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
           </label>
-          <label className="block mb-2">
+          <label className="block text-base font-bold mb-3">
             Correo:
             <input
               type="email"
@@ -52,38 +52,36 @@ const useModalForm = (initialClient, handleEditClient) => {
               autoComplete="email"
               defaultValue={client.email}
               onChange={handleChange}
-              className="w-full p-1 pl-2 border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-200 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
+              className="w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
           </label>
-          <label className="block mb-4">
+          <label className="block text-base font-bold mb-3">
             Rol:
             <select
               name="role" // Añade el atributo 'name'
               defaultValue={client.role}
               onChange={handleChange}
-              className="mb-4 w-full p-1 pl-2 border rounded-lg dark:bg-[#27272a] bg-gray-50 dark:text-gray-100  text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
+              className="mb-4 w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] bg-gray-50 dark:text-gray-300  text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             >
               <option value="admin">Admin</option>
               <option value="user">User</option>
             </select>
           </label>
-          <div className="flex justify-end gap-2">
-            {" "}
-            {/* Agrega un contenedor para los botones */}
+          <div className="flex justify-end gap-3">
             <button
-              type="button" // Cambia a type="button" para evitar que envíe el formulario automáticamente
+              type="button"
               onClick={() => {
                 handleEditClient(client.id, client.name, client.email);
                 closeModal(); // Cierra el modal después de guardar
               }}
-              className="bg-sky-600 text-base text-white p-2 rounded active:opacity-75"
+              className="bg-sky-600 text-base text-white p-2 rounded active:opacity-75 hover:bg-sky-700 transition-colors"
             >
-              Guardar Cambios
+              Guardar
             </button>
             <button
               type="button" // Cambia a type="button"
               onClick={closeModal}
-              className="bg-gray-400 text-base text-white p-2 rounded active:opacity-75"
+              className="bg-gray-500 text-base text-white p-2 rounded active:opacity-75 hover:bg-gray-600 transition-colors"
             >
               Cancelar
             </button>
