@@ -2,7 +2,7 @@ import {
   HiChevronLeft,
   HiChevronRight,
   HiArchiveBoxXMark,
-  HiAdjustmentsHorizontal,
+  HiMiniPencilSquare,
 } from "react-icons/hi2";
 import { useState, useEffect } from "react";
 import { getClients } from "../services/Clients";
@@ -73,10 +73,9 @@ export const Clients = () => {
   };
 
   return (
-    <div className="mx-auto bg-white dark:bg-[#27272a] sm:w-3/4 w-full h-full flex justify-center">
-      <section className="flex flex-col gap-4 text-lg text-gray-800 items-center justify-center w-full h-full rounded-lg shadow-sm p-10 dark:text-gray-200 dark:shadow-md dark:shadow-gray-800">
+    <div className="mx-auto bg-white dark:bg-zinc-800 sm:w-3/5 w-full flex-wrap h-full rounded-xl ">
+      <section className="flex flex-col flex-wrap gap-10 text-lg text-gray-800 items-center p-6 dark:text-gray-300 dark:shadow-gray-800">
         <h1 className="text-xl font-semibold">Clientes</h1>
-
         {loading && <p>Cargando clientes...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
@@ -85,34 +84,34 @@ export const Clients = () => {
         ) : (
           !loading &&
           !error && (
-            <table className="w-full p-3 text-base  dark:text-gray-400">
-              <thead className="border-b dark:border-gray-700">
-                <tr className="font-semibold text-lg">
-                  <th>Nombre</th>
+            <table className="w-full dark:text-gray-400 ">
+              <thead>
+                <tr className="dark:text-gray-400 h-10 dark:bg-zinc-700 bg-zinc-100 text-slate-600 font-semibold text-base">
+                  <th className="rounded-l-lg">Nombre</th>
                   <th>Correo</th>
-                  <th>Acciones</th>
+                  <th className="rounded-r-lg">Acciones</th>
                 </tr>
               </thead>
               <tbody id="data-body">
                 {clients.map((client) => (
                   <tr
                     key={client.id}
-                    className="border-b border-spacing-5 border-separate text-center dark:border-gray-700"
+                    className=" dark:text-gray-300 text-slate-950 text-center font-semibold text-base"
                   >
-                    <td>{client.name}</td>
-                    <td>{client.email}</td>
-                    <td className="flex justify-center gap-3">
+                    <td className="w-1/3 h-12">{client.name}</td>
+                    <td className="w-1/3 h-12">{client.email}</td>
+                    <td className="flex h-12 justify-center gap-1">
                       <button
                         onClick={() => openModal(client)} // Correct way to pass client to openModal
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 rounded-md"
+                        className="bg-transparent  hover:opacity-70 transition-all py-1 px-1 rounded-md"
                       >
-                        <HiAdjustmentsHorizontal />
+                        <HiMiniPencilSquare size={22} color="#38bdf8" />
                       </button>
                       <button
                         onClick={() => handleEliminate(client.id)} // Correct way to pass id
-                        className="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded-md"
+                        className="bg-transparent hover:opacity-70 transition-all py-1 px-1 rounded-md"
                       >
-                        <HiArchiveBoxXMark />
+                        <HiArchiveBoxXMark size={22} color="#ef4444" />
                       </button>
                     </td>
                   </tr>

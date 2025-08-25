@@ -15,6 +15,10 @@ import { Config } from "./components/Config";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Login />,
+  },
+  {
     path: "/home",
     element: <App />,
     children: [
@@ -35,10 +39,6 @@ const router = createBrowserRouter([
         element: <Config />,
       },
     ],
-  },
-  {
-    path: "/",
-    element: <Login />,
   },
 ]);
 

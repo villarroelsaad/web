@@ -29,14 +29,14 @@ export const Login = () => {
     }
   };
   return (
-    <section className="flex flex-col justify-center  items-center  text-gray-800 ">
+    <section className="flex flex-col font-medium items-center  text-gray-800 ">
       <DarkMode />
       <form onSubmit={handleSubmit}>
-        <div className=" flex flex-col border-2 bg-white border-zinc-200 mt-44 rounded-lg p-10 w-96 dark:bg-[#27272a] dark:text-gray-100 dark:border-zinc-800">
+        <div className=" flex flex-col border-2 bg-white border-zinc-200 mt-44 rounded-lg p-12 w-[380px]  dark:bg-[#27272a] dark:text-gray-100 dark:border-zinc-800">
           <h1 className="font-semibold opacity-90 text-3xl mb-8  text-center">
             Ingresar
           </h1>
-          <p className=" opacity-85 text-base  ">Usuario</p>
+          <p className=" opacity-85 text-base">Usuario</p>
           <input
             value={userName}
             onChange={(e) => {
@@ -46,7 +46,7 @@ export const Login = () => {
             type="text"
             className="mb-5 opacity-85 rounded-md bg-transparent border-2 border-zinc-500 outline-none p-2 focus:border-sky-400 transition-all"
           />
-          <p className="opacity-85 text-base">Password</p>
+          <p className="opacity-85text-base">Password</p>
           <input
             value={password}
             onChange={(e) => {
@@ -62,14 +62,14 @@ export const Login = () => {
             </Link>
             <Link
               to="/"
-              className="0 opacity-75 text-end text-sm hover:text-sky-400"
+              className=" opacity-75 text-end text-sm hover:text-sky-400"
             >
               Inicio
             </Link>
           </div>
           <button
             type="submit"
-            className="bg-sky-400  mt-7 w-28 p-2 self-center text-center rounded-lg font-semibold active:opacity-85  hover:bg-sky-300 transition-all dark:bg-sky-600 dark:hover:bg-opacity-90"
+            className="bg-sky-300  mt-7 w-28 p-2 self-center text-center rounded-lg font-semibold active:opacity-85  hover:bg-opacity-80 transition-all dark:bg-sky-600 dark:hover:bg-opacity-90"
           >
             Iniciar sesion
           </button>

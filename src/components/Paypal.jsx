@@ -21,7 +21,7 @@ export const Paypal = () => {
       <section className="flex flex-col gap-4 text-lg text-gray-800 items-center justify-center w-full h-full rounded-lg shadow-sm p-10 dark:text-gray-200 dark:shadow-md dark:shadow-gray-800">
         <h1 className="text-xl font-semibold">CONFIRMACIONES PAYPAL</h1>
         <input
-          className="m-5 rounded-lg text-gray-700 p-2 w-5/12 h-8 text-base font-medium  outline-none bg-gray-50 border-2 focus:border-sky-300 transition-all dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:focus:border-sky-200"
+          className="text-gray-700 p-2 pl-4 m-8 mb-10 w-5/12 bg-transparent h-8 text-base font-medium outline-none bg-gray-50 border-b-2 focus:border-sky-300 transition-all  dark:text-gray-200 dark:border-gray-600 dark:focus:border-sky-200"
           type="text"
           id="search"
           placeholder="Nombre, fecha o correo o id paypal"

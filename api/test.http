@@ -3,6 +3,9 @@
 ###recuperar links
 GET  http://localhost:3000/client/get
 ###
+###recuperar links
+GET  http://localhost:3000/sale/get
+###
 
 POST  http://localhost:1234/register
 Content-Type: application/json
