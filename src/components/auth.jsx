@@ -7,8 +7,8 @@ export const RequireAuth = ({ children }) => {
   const location = useLocation();
   const isAuthenticated = user;
 
-  if (isAuthenticated === "") {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  if (isAuthenticated === "" || isAuthenticated === null) {
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return children;
@@ -18,8 +18,8 @@ export const RequireAuthAdmin = ({ children }) => {
   const { user } = useContext(UserContext);
   const location = useLocation();
 
-  if (user.role !== "admin") {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  if (user.Role !== "admin") {
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return children;

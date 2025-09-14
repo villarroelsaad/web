@@ -84,7 +84,7 @@ export const Clients = () => {
         ) : (
           !loading &&
           !error && (
-            <table className="w-full dark:text-gray-400 ">
+            <table className="w-11/12 dark:text-gray-400 ">
               <thead>
                 <tr className="dark:text-gray-400 h-10 dark:bg-zinc-700 bg-zinc-100 text-slate-600 font-semibold text-base">
                   <th className="rounded-l-lg">Nombre</th>

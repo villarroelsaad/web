@@ -1,5 +1,6 @@
 import { useState, useRef, useContext } from "react";
 import { UserContext } from "../services/context";
+import { useNavigate } from "react-router-dom";
 import { LogOut } from "../services/logOut";
 import { Link } from "react-router-dom";
 import useClickOutside from "../hooks/useNavBar";
@@ -17,7 +18,8 @@ import {
 export const NabBar = () => {
   const [nav, setNav] = useState(false);
   const menuRef = useRef(null);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const toggleNav = () => {
     setNav(!nav);
@@ -27,7 +29,9 @@ export const NabBar = () => {
     if (window.confirm("¿Estás seguro de que quieres cerrar sesión?")) {
       try {
         await LogOut();
-        // navigate("/");
+        setUser(null);
+        console.log("Sesión cerrada");
+        navigate("/");
       } catch (error) {
         console.error("Error al cerrar sesión:", error);
       }
@@ -58,7 +62,7 @@ export const NabBar = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-6 overflow-y-auto bg-gray-50 dark:bg-[#27272a] border-r-2 border-shadow-md dark:border-r-2 dark:border-gray-500">
-          <ul className="space-y-4 font-medium">
+          <ul className="space-y-2 font-medium">
             <li>
               <Link
                 to="/home"
@@ -109,7 +113,12 @@ export const NabBar = () => {
                 </span>
               </Link>
             </li>
-            {user.role === "admin" && (
+
+            <div className="flex justify-start ml-3 items-center m-0">
+              <hr className="w-5/6 h-0.5 bg-zinc-600 border-none" />
+            </div>
+
+            {user.Role === "admin" && (
               <li>
                 <Link
                   to="/home/config"
@@ -128,7 +137,9 @@ export const NabBar = () => {
                 className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group"
               >
                 <HiPower size={22} />
-                <span className="flex-1 ms-3 whitespace-nowrap">log out</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  cerrar sesion
+                </span>
               </a>
             </li>
           </ul>

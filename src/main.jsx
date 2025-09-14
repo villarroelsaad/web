@@ -12,6 +12,7 @@ import { Sales } from "./components/Sales";
 import { Login } from "./components/Login";
 import { Clients } from "./components/Clients";
 import { Config } from "./components/Config";
+import { RequireAuth, RequireAuthAdmin } from "./components/auth";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <App />,
+    element: (
+      <RequireAuth>
+        <App />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/home/paypal",
@@ -36,7 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/home/config",
-        element: <Config />,
+        element: (
+          <RequireAuthAdmin>
+            <Config />
+          </RequireAuthAdmin>
+        ),
       },
     ],
   },

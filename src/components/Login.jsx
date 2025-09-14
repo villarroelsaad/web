@@ -19,8 +19,8 @@ export const Login = () => {
       setUser(user);
       setUserName("");
       setPassword("");
-      console.log(user.Username);
-      return navigate("/");
+      console.log(user.UserName);
+      return navigate("/home");
     } catch (err) {
       setUserName("");
       setPassword("");
@@ -44,7 +44,7 @@ export const Login = () => {
             }}
             required
             type="text"
-            className="mb-5 opacity-85 rounded-md bg-transparent border-2 border-zinc-500 outline-none p-2 focus:border-sky-400 transition-all"
+            className="mb-5 opacity-85 rounded-xl dark:bg-zinc-700 bg-slate-100 border-2 border-zinc-500 outline-none p-2 focus:border-sky-400 transition-all"
           />
           <p className="opacity-85text-base">Password</p>
           <input
@@ -54,7 +54,7 @@ export const Login = () => {
             }}
             required
             type="password"
-            className="p-2 opacity-85 bg-transparent border-2 border-zinc-500 outline-none rounded-md focus:border-sky-400 transition-all"
+            className=" opacity-85 rounded-xl  dark:bg-zinc-700 bg-slate-100 border-2 border-zinc-500 outline-none p-2 focus:border-sky-400 transition-all"
           />
           <div className="flex mt-1 justify-between">
             <Link to="/" className="opacity-75  text-sm hover:text-sky-400">
