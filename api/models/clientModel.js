@@ -17,7 +17,7 @@ export class ClientModel {
       // Function to simulate processing a refund
       static async updateClient({id, input}) {
         const { name, email, role } = input;
-        await connection.execute('UPDATE Clients  inner join Sales on Id_c = Id_s SET PayerName_c = ?, PayerEmail_c = ? WHERE Id_c = ?', [name, email, role, id]);
+        await connection.execute('UPDATE Clients inner join Sales on Id_c = Id_s SET PayerName_c = ?, PayerEmail_c = ? WHERE Id_c = ?', [name, email, role, id]);
         return true; 
     }
     

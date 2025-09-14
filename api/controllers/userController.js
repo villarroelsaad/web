@@ -10,7 +10,7 @@ export class UserController {
     static async getUsers(req, res) {
         try {
             const users = await UserModel.getUsers();
-            res.status(200).json(users);
+            return res.status(200).json(users);
         } catch (error) {
             console.error('Error fetching users:', error);
             res.status(500).json({ error: 'Internal server error' });
@@ -50,25 +50,27 @@ export class UserController {
             if (!result.success) {
                 return res.status(400).json({ error: JSON.parse(result.error.message) });
             }
+
             const { username, password } = result.data;
             const user = await UserModel.findByUsername(username);
+
             if (!user) {
                 return res.status(401).json({ error: 'Invalid username or password' });
             }
             // Compare the provided password with the hashed password in the database
-            const isPasswordValid = bcrypt.compare(password, user.password);
+
+            const isPasswordValid = bcrypt.compare(password, user.UserPassword_u);
 
             if (!isPasswordValid) {
                 return res.status(401).json({ error: 'Invalid username or password' });
             }
-            const { password: _, ...authUser } = user
+            const { UserPassword_u: _, ...authUser } = user
             // Create a JWT token and set it in the cookies
             const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
             res.cookie('access_token', token, {
                 httpOnly: true
             })
-            res.status(200).json({ message: 'Login successful' });
-            return res.json({ authUser });
+            return res.status(200).json({ message: 'Login successful', authUser });
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
         }

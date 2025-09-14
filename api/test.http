@@ -1,7 +1,7 @@
 
 
 ###recuperar links
-GET  http://localhost:3000/client/get
+GET  http://localhost:3000/user/get
 ###
 ###recuperar links
 GET  http://localhost:3000/sale/get
@@ -16,10 +16,10 @@ Content-Type: application/json
   "password": "securePassword1"
 }
 ####
-POST  http://localhost:1234/login
+POST  http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "username": "john_doe",
-  "password": "securePassword1"
+  "username": "jose",
+  "password": "12345678"
 }
