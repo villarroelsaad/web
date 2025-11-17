@@ -11,6 +11,11 @@ export class UserModel {
         return user[0]
     }
 
+    static async getUserById(id) {
+        const [rows] = await connection.execute('SELECT UserID_u, Username_u, Email_u, Role_u FROM Users WHERE UserID_u = ?', [id]);
+        return rows[0] || null;
+    }
+
     static async login({ input }) {
         const { username } = input
         const [userRows] = await connection.execute('SELECT UserID_u, UserName_u, UserPassword_u, Role.u FROM Users WHERE Username = ?', [username])

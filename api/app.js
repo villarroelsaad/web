@@ -8,12 +8,13 @@ import { routerUser } from './routes/rUser.js'
 import { routerSale } from './routes/rSales.js';
 import { routerPay } from './routes/rPay.js'
 import { routerClient } from './routes/rClient.js'
+import { routerPublish } from './routes/rPublish.js'
 import { corsOptions } from './config.js';
 
 dotenv.config();
 const port = 3000;
 
-const app = express();
+const app = express(); 
 
 app.disable('x-powered-by')
 app.use(express.json())
@@ -27,6 +28,7 @@ app.use('/user', routerUser)
 app.use('/pay', routerPay)
 app.use('/client', routerClient)
 app.use('/sale', routerSale)
+app.use('/publish', routerPublish)
 
 app.listen(port, () => {
     console.log('Server running on port 3000')

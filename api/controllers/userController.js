@@ -64,12 +64,21 @@ export class UserController {
             if (!isPasswordValid) {
                 return res.status(401).json({ error: 'Invalid username or password' });
             }
-            const { UserPassword_u: _, ...authUser } = user
+            const { UserPassword_u: _, ...authUser } = user;
+            // Try to extract a stable id and role for the token payload
+            const userId = user.UserID_u || user.id || user.UserID || null;
+            const userRole = user.Role_u || user.Role || null;
             // Create a JWT token and set it in the cookies
-            const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
+            const tokenPayload = {};
+            if (userId) tokenPayload.id = userId;
+            if (userRole) tokenPayload.role = userRole;
+            const token = jwt.sign(tokenPayload, process.env.SECRET, { expiresIn: '1h' });
             res.cookie('access_token', token, {
-                httpOnly: true
-            })
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                maxAge: 3600000 // 1 hora en milisegundos
+            });
+            // Return authUser only; token is stored as an httpOnly cookie for security
             return res.status(200).json({ message: 'Login successful', authUser });
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
@@ -84,7 +93,8 @@ export class UserController {
             return res.status(500).json({ error: 'Internal server error' });
         }
     }
-    static async deleteUser(req, res) { 
+
+    static async deleteUser(req, res) {
         const { id } = req.params;
         try {
             const user = await UserModel.getUserById(id);
