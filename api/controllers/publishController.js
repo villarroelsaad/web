@@ -16,12 +16,16 @@ export class PublishController {
 		try {
 			const { publish } = req.body;
 			// Only admins can publish — require authenticated session
-			const sessionUserId = req.session?.user?.id;
-			if (!sessionUserId) return res.status(401).json({ error: "Not authenticated" });
+			const sessionUser = req.session?.user;
+			if (!sessionUser) return res.status(401).json({ error: "Not authenticated" });
 
-			// verify role from DB
-			const [rows] = await connection.execute("SELECT Role_u FROM Users WHERE UserID_u = ?", [sessionUserId]);
-			const role = rows?.[0]?.Role_u;
+			// If the token includes the role directly, prefer that. Otherwise fall back to DB lookup using id.
+			let role = sessionUser.role || sessionUser.role || null;
+			let sessionUserId = sessionUser.id || null;
+			if (!role && sessionUserId) {
+				const [rows] = await connection.execute("SELECT Role_u FROM Users WHERE UserID_u = ?", [sessionUserId]);
+				role = rows?.[0]?.Role_u;
+			}
 			if (role !== "admin") return res.status(403).json({ error: "Forbidden" });
 
 			if (!publish) {
@@ -41,12 +45,15 @@ export class PublishController {
 			const { id } = req.params;
 			if (!id) return res.status(400).json({ error: "Missing id" });
 
-			const sessionUserId = req.session?.user?.id;
-			if (!sessionUserId) return res.status(401).json({ error: "Not authenticated" });
+			const sessionUser = req.session?.user;
+			if (!sessionUser) return res.status(401).json({ error: "Not authenticated" });
 
-			// verify role from DB
-			const [rows] = await connection.execute("SELECT Role_u FROM Users WHERE UserID_u = ?", [sessionUserId]);
-			const role = rows?.[0]?.Role_u;
+			let role = sessionUser.role || null;
+			const sessionUserId = sessionUser.id || null;
+			if (!role && sessionUserId) {
+				const [rows] = await connection.execute("SELECT Role_u FROM Users WHERE UserID_u = ?", [sessionUserId]);
+				role = rows?.[0]?.Role_u;
+			}
 			if (role !== "admin") return res.status(403).json({ error: "Forbidden" });
 
 			await PublishModel.deleteById(id);
