@@ -7,7 +7,7 @@ export class UserModel {
         return userRows
     }
     static async findByUsername(username) {
-        const [user] = await connection.execute('SELECT Username_u, Email_u,UserPassword_u,Role_u FROM Users WHERE Username_u = ?', [username])
+        const [user] = await connection.execute('SELECT UserID_u, Username_u, Email_u, UserPassword_u, Role_u FROM Users WHERE Username_u = ?', [username])
         return user[0]
     }
 
