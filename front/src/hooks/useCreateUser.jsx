@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
+import { Register } from "../services/user/Register";
 
-const useModalFormUser = (initialuser, handleEdit) => {
+const useModalFormCreateUser = () => {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState(initialuser); // Estado para el usere a editar en el modal
+  const [user, setUser] = useState({ UserName: "", email: "", role: "user" }); // Estado para el user a editar en el modal
 
-  const openModal = useCallback((userToEdit) => {
-    setUser(userToEdit); // Establecer el usere que se va a editar
+  const openModal = useCallback(() => {
     setModal(true);
   }, []);
 
@@ -22,6 +22,13 @@ const useModalFormUser = (initialuser, handleEdit) => {
     }));
   }, []);
 
+      const handleCreateUser = useCallback(async () => {
+    try {
+      await Register(user.UserName, user.email, user.role);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  }, [user]);
   // Función para renderizar el modal
   const ModalForm = useCallback(() => {
     if (!modal || !user) return null; // No renderizar si el modal no está abierto o no hay usere
@@ -31,7 +38,7 @@ const useModalFormUser = (initialuser, handleEdit) => {
         {" "}
         {/* Usa 'open' para controlar la visibilidad con HTML Dialog Element */}
         <form
-          id={user.id}
+          name="create-form"
           method="dialog"
           className="p-11 border border-sky-500 dark:bg-[#27272a] text-gray-800 dark:text-gray-300 rounded-md shadow-lg "
         >
@@ -72,7 +79,7 @@ const useModalFormUser = (initialuser, handleEdit) => {
             <button
               type="button"
               onClick={() => {
-                handleEdit(user.id, user.UserName, user.email, user.role);
+                handleCreateUser();
                 closeModal(); // Cierra el modal después de guardar
               }}
               className="bg-blue-500 text-white p-2 rounded"
@@ -90,13 +97,13 @@ const useModalFormUser = (initialuser, handleEdit) => {
         </form>
       </dialog>
     );
-  }, [modal, user, handleChange, closeModal, handleEdit]); // Dependencias para useCallback
+  }, [modal, user, handleChange, closeModal, handleCreateUser]); // Dependencias para useCallback
 
   return {
-    openModal,
-    closeModal,
-    ModalForm, // Componente para renderizar el modal
+    openModalU : openModal,
+    closeModalU : closeModal,
+    ModalFormU : ModalForm, // Componente para renderizar el modal
   };
 };
 
-export default useModalFormUser;
+export default useModalFormCreateUser;

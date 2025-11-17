@@ -23,9 +23,9 @@ export const GetUsers = async () => {
 
         const users = data.map(user => ({
             id: user.UserID_u,
-            UserName: user.Username_u,
-            Email: user.Email_u,
-            Role: user.Role_u
+            userName: user.Username_u,
+            email: user.Email_u,
+            role: user.Role_u
         }));
         console.log(users);
         return users;

@@ -10,6 +10,7 @@ import {
 import { DeleteU } from "../services/user/DeleteU";
 import { EditU } from "../services/user/EditU";
 import useModalFormUser from "../hooks/useEditUser";
+import useModalFormCreateUser from "../hooks/useCreateUser";
 
 export const Config = () => {
   const [user, setUser] = useState([]);
@@ -33,6 +34,7 @@ export const Config = () => {
     }
   };
   const { openModal, ModalForm } = useModalFormUser(null, handleEditUser);
+  const { openModalU, ModalFormU } = useModalFormCreateUser();
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Set loading true before fetch
@@ -52,7 +54,12 @@ export const Config = () => {
   return (
     <div className="mx-auto bg-white dark:bg-zinc-800 sm:w-3/5 w-full flex-wrap h-full rounded-xl ">
       <section className="flex flex-col flex-wrap gap-10 text-lg text-gray-800 items-center p-6 dark:text-gray-300 dark:shadow-gray-800">
-        <h1 className="text-xl font-semibold">Configuración de usuarios</h1>
+        <div className="w-full flex items-center justify-between">
+          <h1 className="text-xl font-semibold">Configuración de usuarios</h1>
+          <div>
+            <button onClick={() => openModalU(null)}>Crear usuario</button>
+          </div>
+        </div>
         {loading && <p>Cargando usuarios...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {!loading && !error && user.length === 0 ? (
@@ -104,6 +111,7 @@ export const Config = () => {
             </table>
           )
         )}
+        <ModalFormU></ModalFormU>
         <ModalForm handleEditUser={handleEditUser} />
         <div className="flex gap-4 mt-5">
           <button className="p-1 rounded">
