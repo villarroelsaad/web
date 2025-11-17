@@ -7,13 +7,13 @@ GET  http://localhost:3000/user/get
 GET  http://localhost:3000/sale/get
 ###
 
-POST  http://localhost:1234/register
+POST  http://localhost:3000/user/register
 Content-Type: application/json
 
 {
-  "username": "john_doe",
-  "email": "john.doe@example.com",
-  "password": "securePassword1"
+  "username": "dylan",
+  "email": "jdyy@example.com",
+  "password": "12345678"
 }
 ####
 POST  http://localhost:3000/user/login

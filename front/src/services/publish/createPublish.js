@@ -3,7 +3,7 @@ export const createPublish = async (text) => {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ publish_p: text }),
+    body: JSON.stringify({ publish: text }),
   });
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));

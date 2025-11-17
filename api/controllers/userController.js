@@ -58,7 +58,9 @@ export class UserController {
             }
 
             const { username, password } = result.data;
+            console.log('Login attempt for username:', username);
             const user = await UserModel.findByUsername(username);
+            console.log('User fetched from DB:', user ? { Username_u: user.Username_u, Role_u: user.Role_u } : null);
 
             if (!user) {
                 return res.status(401).json({ error: 'Invalid username or password' });
@@ -66,6 +68,7 @@ export class UserController {
             // Compare the provided password with the hashed password in the database
 
             const isPasswordValid = await bcrypt.compare(password, user.UserPassword_u);
+            console.log('Password match result for', username, ':', isPasswordValid);
 
             if (!isPasswordValid) {
                 return res.status(401).json({ error: 'Invalid username or password' });
@@ -82,6 +85,7 @@ export class UserController {
             res.cookie('access_token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
+                sameSite: 'none',
                 maxAge: 3600000 // 1 hora en milisegundos
             });
             // Return authUser only; token is stored as an httpOnly cookie for security
@@ -93,7 +97,7 @@ export class UserController {
     }
     static async logOut(req, res) {
         try {
-            res.clearCookie('access_token');
+            res.clearCookie('access_token', { path: '/', sameSite: 'none', secure: process.env.NODE_ENV === 'production' });
             res.status(200).json({ message: 'Logout successful' });
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
