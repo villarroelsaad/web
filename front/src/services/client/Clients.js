@@ -1,5 +1,5 @@
 export const getClients = async () => {
-    const response = await fetch('http://localhost:3000/client/get', {
+    const response = await fetch('https://web-api-orpin.vercel.app/client/get', {
         method: 'GET',
         headers: {
         'Content-Type': 'application/json',

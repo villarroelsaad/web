@@ -1,6 +1,6 @@
 export const LogOut = async () => {
     try {
-      const response = await fetch('http://localhost:3000/user/logout', {
+      const response = await fetch('https://web-api-orpin.vercel.app/user/logout', {
         method: 'GET',
         credentials: 'include',
         headers: {
