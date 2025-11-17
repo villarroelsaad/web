@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { validateUser, validatePartialUser } from '../schema/users.js';
 import { UserModel } from '../models/userModel.js';
 import dotenv from 'dotenv';
@@ -32,8 +32,14 @@ export class UserController {
             if (existingUser) {
                 return res.status(409).json({ error: 'Username already exists' });
             }
-            const hashedPassword = bcrypt.hash(result.data.password, 10)
-            await UserModel.create({ input: result.data, hashedPassword })
+            const hashedPassword = await bcrypt.hash(result.data.password, 10);
+            const userInput = {
+                username: result.data.username,
+                email: result.data.email,
+                hashedPassword,
+                role: result.data.role || 'user'
+            };
+            await UserModel.register({ input: userInput });
             console.log('User created successfully')
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
@@ -59,7 +65,7 @@ export class UserController {
             }
             // Compare the provided password with the hashed password in the database
 
-            const isPasswordValid = bcrypt.compare(password, user.UserPassword_u);
+            const isPasswordValid = await bcrypt.compare(password, user.UserPassword_u);
 
             if (!isPasswordValid) {
                 return res.status(401).json({ error: 'Invalid username or password' });
