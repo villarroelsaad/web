@@ -39,7 +39,7 @@ const useModalForm = (initialClient, handleEditClient) => {
               type="text"
               name="name" // Añade el atributo 'name' para el handleChange
               autoComplete="name"
-              defaultValue={client.name}
+              value={client.name}
               onChange={handleChange}
               className="w-full p-1 pl-2  font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
@@ -50,7 +50,7 @@ const useModalForm = (initialClient, handleEditClient) => {
               type="email"
               name="email" // Añade el atributo 'name'
               autoComplete="email"
-              defaultValue={client.email}
+              value={client.email}
               onChange={handleChange}
               className="w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
@@ -59,7 +59,7 @@ const useModalForm = (initialClient, handleEditClient) => {
             Rol:
             <select
               name="role" // Añade el atributo 'name'
-              defaultValue={client.role}
+              value={client.role}
               onChange={handleChange}
               className="mb-4 w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] bg-gray-50 dark:text-gray-300  text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             >
