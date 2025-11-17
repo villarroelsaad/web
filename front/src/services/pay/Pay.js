@@ -1,5 +1,5 @@
 export const getPaypalIpn = async () => {
-    const response = await fetch('http://localhost:3000/pay/get-ipn', {
+    const response = await fetch('https://web-api-orpin.vercel.app/pay/get-ipn', {
         method: 'GET',
         headers: {
         'Content-Type': 'application/json',

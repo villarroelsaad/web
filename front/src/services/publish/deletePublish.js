@@ -1,5 +1,5 @@
 export const deletePublish = async (id) => {
-  const response = await fetch(`http://localhost:3000/publish/${id}`, {
+  const response = await fetch(`https://web-api-orpin.vercel.app/publish/${id}`, {
     method: "DELETE",
     credentials: "include",
     headers: { "Content-Type": "application/json" },

@@ -1,5 +1,5 @@
 export const createPublish = async (text) => {
-  const response = await fetch("http://localhost:3000/publish", {
+  const response = await fetch("https://web-api-orpin.vercel.app/publish", {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
