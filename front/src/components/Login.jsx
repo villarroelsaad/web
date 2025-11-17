@@ -55,7 +55,7 @@ export const Login = () => {
             type="password"
             className=" opacity-85 rounded-xl  dark:bg-zinc-700 bg-slate-100 border-2 border-zinc-500 outline-none p-2 focus:border-sky-400 transition-all"
           />
-          <div className="flex mt-1 justify-between">
+          {/* <div className="flex mt-1 justify-between">
             <Link to="/" className="opacity-75  text-sm hover:text-sky-400">
               Registrarse
             </Link>
@@ -65,7 +65,7 @@ export const Login = () => {
             >
               Inicio
             </Link>
-          </div>
+          </div> */}
           <button
             type="submit"
             className="bg-sky-300  mt-7 w-28 p-2 self-center text-center rounded-lg font-semibold active:opacity-85  hover:bg-opacity-80 transition-all dark:bg-sky-600 dark:hover:bg-opacity-90"

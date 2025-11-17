@@ -13,8 +13,8 @@ import { corsOptions } from './config.js';
 
 dotenv.config();
 const port = 3000;
-
 const app = express(); 
+
 
 app.disable('x-powered-by')
 app.use(express.json())
@@ -23,7 +23,7 @@ app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session)
 
-
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use('/user', routerUser)
 app.use('/pay', routerPay)
 app.use('/client', routerClient)
