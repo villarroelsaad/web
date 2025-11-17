@@ -35,13 +35,13 @@ const useModalFormUser = (initialuser, handleEdit) => {
           method="dialog"
           className="p-11 border border-sky-500 dark:bg-[#27272a] text-gray-800 dark:text-gray-300 rounded-md shadow-lg "
         >
-          <h2 className="text-lg font-semibold mb-4">Crear usuario</h2>
+          <h2 className="text-lg font-semibold mb-4">Editar usuario</h2>
           <label className="block mb-2">
             Usuario:
             <input
               type="text"
               name="name" // Añade el atributo 'name' para el handleChange
-              defaultValue={user.UserName}
+              defaultValue={user.userName}
               onChange={handleChange}
               className="w-full p-1 pl-2  font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
@@ -72,7 +72,7 @@ const useModalFormUser = (initialuser, handleEdit) => {
             <button
               type="button"
               onClick={() => {
-                handleEdit(user.id, user.UserName, user.email, user.role);
+                handleEdit(user.id, user.userName, user.email, user.role);
                 closeModal(); // Cierra el modal después de guardar
               }}
               className="bg-blue-500 text-white p-2 rounded"

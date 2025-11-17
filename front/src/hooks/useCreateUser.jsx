@@ -3,7 +3,7 @@ import { Register } from "../services/user/Register";
 
 const useModalFormCreateUser = () => {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState({ UserName: "", email: "", role: "user" }); // Estado para el user a editar en el modal
+  const [user, setUser] = useState({ userName: "", email: "", role: "user" }); // Estado para el user a editar en el modal
 
   const openModal = useCallback(() => {
     setModal(true);
@@ -22,9 +22,9 @@ const useModalFormCreateUser = () => {
     }));
   }, []);
 
-      const handleCreateUser = useCallback(async () => {
+  const handleCreateUser = useCallback(async () => {
     try {
-      await Register(user.UserName, user.email, user.role);
+      await Register(user.userName, user.email, user.role);
     } catch (error) {
       console.error("Error creating user:", error);
     }
@@ -47,8 +47,8 @@ const useModalFormCreateUser = () => {
             Usuario:
             <input
               type="text"
-              name="name" // Añade el atributo 'name' para el handleChange
-              defaultValue={user.UserName}
+              name="userName" // Añade el atributo 'name' para el handleChange
+              defaultValue={user.userName}
               onChange={handleChange}
               className="w-full p-1 pl-2  font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1  border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
