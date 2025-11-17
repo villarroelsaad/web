@@ -16,7 +16,8 @@ export const corsOptions = {
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true // Permite enviar cookies en solicitudes
+  credentials: true,// Permite enviar cookies en solicitudes
+  cookies: true
 }
 
 export const connection = await mysql.createConnection({

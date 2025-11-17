@@ -11,3 +11,4 @@ routerUser.get("/get", UserController.getUsers);
 routerUser.get("/logout", UserController.logOut);
 routerUser.get("/delete/:id", UserController.deleteUser);
 
+
