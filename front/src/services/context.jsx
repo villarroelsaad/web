@@ -15,7 +15,7 @@ function UserProvider({ children }) {
     }
   });
 
-  // Sincroniza el estado del usuario con localStorage
+
   useEffect(() => {
     try {
       if (user) {
