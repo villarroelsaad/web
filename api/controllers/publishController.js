@@ -22,11 +22,29 @@ export class PublishController {
 			// If the token includes the role directly, prefer that. Otherwise fall back to DB lookup using id.
 			let role = sessionUser.role || sessionUser.role || null;
 			let sessionUserId = sessionUser.id || null;
+			// If token didn't include role but has an id, fetch role from DB
 			if (!role && sessionUserId) {
 				const [rows] = await connection.execute("SELECT Role_u FROM Users WHERE UserID_u = ?", [sessionUserId]);
 				role = rows?.[0]?.Role_u;
 			}
+
+			// If role came from token but id is missing, try to resolve userId from token fields (email/username)
+			if (!sessionUserId) {
+				const possibleEmail = sessionUser.email || sessionUser.Email || null;
+				const possibleUsername = sessionUser.username || sessionUser.UserName || null;
+				if (possibleEmail) {
+					const [rows] = await connection.execute('SELECT UserID_u FROM Users WHERE Email_u = ?', [possibleEmail]);
+					sessionUserId = rows?.[0]?.UserID_u || null;
+				} else if (possibleUsername) {
+					const [rows] = await connection.execute('SELECT UserID_u FROM Users WHERE Username_u = ?', [possibleUsername]);
+					sessionUserId = rows?.[0]?.UserID_u || null;
+				}
+			}
+
 			if (role !== "admin") return res.status(403).json({ error: "Forbidden" });
+
+			// If we still don't have a sessionUserId, require re-login because DB needs a user id for the publish
+			if (!sessionUserId) return res.status(400).json({ error: "Missing user id in token — please re-login" });
 
 			if (!publish) {
 				return res.status(400).json({ error: "Missing publish text" });
