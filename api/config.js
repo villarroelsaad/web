@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['https://web-ten-pi-26.vercel.app']
 export const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -23,7 +23,7 @@ export const corsOptions = {
 export const connection = await mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: '',
+  password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 })
 
