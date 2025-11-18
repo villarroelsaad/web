@@ -24,6 +24,7 @@ export const Config = () => {
       true
     ) {
       DeleteU(id);
+      setUser(user.filter((u) => u.id !== id));
     }
   };
   const handleEdit = (id, username, email, role) => {
@@ -31,7 +32,7 @@ export const Config = () => {
       window.confirm("¿Estás seguro de que quieres editar este elemento?") ===
       true
     ) {
-      EditU(id, username, email, role);
+      EditU(username, email, role, id);
     }
   };
   const { modal, userE, openModal, closeModal, handleChange } =

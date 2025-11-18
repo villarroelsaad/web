@@ -72,14 +72,14 @@ const useModalForm = (initialClient, handleEditClient) => {
               type="button"
               onClick={() => {
                 handleEditClient(client.id, client.name, client.email);
-                closeModal(); // Cierra el modal después de guardar
+                closeModal();
               }}
               className="bg-sky-600 text-base text-white p-2 rounded active:opacity-75 hover:bg-sky-700 transition-colors"
             >
               Guardar
             </button>
             <button
-              type="button" // Cambia a type="button"
+              type="button"
               onClick={closeModal}
               className="bg-gray-500 text-base text-white p-2 rounded active:opacity-75 hover:bg-gray-600 transition-colors"
             >
