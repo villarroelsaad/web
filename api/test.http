@@ -3,7 +3,7 @@
 ###recuperar links
 GET  http://localhost:3000/user/get
 ###
-###recuperar links
+###recuperar 
 GET  http://localhost:3000/sale/get
 ###
 
@@ -14,18 +14,18 @@ Content-Type: application/json
   "username": "dylan",
   "email": "jdyd@example.com",
   "password": "12345678",
-  "role": "admin"
+  "role": "user"
 }
 ####
 POST  http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "username": "jose",
+  "username": "dylan",
   "password": "12345678"
 }
 ###
-DELETE http://localhost:3000/user/delete/3
+DELETE http://localhost:3000/user/delete/6
 
 ###
 PUT   http://localhost:3000/user/edit/3

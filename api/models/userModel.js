@@ -11,7 +11,7 @@ export class UserModel {
         return user[0]
     }
 
-    static async getUserById(id) {
+    static async getUserById({ id }) {
         const [rows] = await connection.execute('SELECT UserID_u, Username_u, Email_u, Role_u FROM Users WHERE UserID_u = ?', [id]);
         return rows[0] || null;
     }
@@ -23,8 +23,8 @@ export class UserModel {
     }
 
     static async register({ input }) {
-        const { username, email, hashedPassword, role } = input
-        await connection.execute('insert into Users (Username_u, Email_u,UserPassword_u,Role_u) values (?,?,?,?);', [username, email, hashedPassword, role])
+        const { username, email, password, role } = input
+        await connection.execute('insert into Users (UserName_u, Email_u, Role_u, UserPassword_u) values (?,?,?,?);', [username, email, role, password])
         return true
     }
     static async deleteUser({ id }) {
