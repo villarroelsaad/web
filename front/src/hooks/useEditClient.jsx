@@ -89,7 +89,7 @@ const useModalForm = (initialClient, handleEditClient) => {
         </form>
       </dialog>
     );
-  }, [modal, closeModal, initialClient, handleChange]); // Dependencias para useCallback
+  }, [modal, closeModal, handleChange]); // Dependencias para useCallback
 
   return {
     openModal,

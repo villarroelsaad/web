@@ -32,6 +32,16 @@ export const CreateUserModal = ({ modal, user, handleChange, closeModal, handleC
               className="w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1 border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
             />
           </label>
+          <label className="block mb-2">
+            Contraseña:
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+              className="w-full p-1 pl-2 font-medium border rounded-lg dark:bg-[#27272a] dark:focus:bg-[#232321] focus:bg-gray-100 bg-gray-50 dark:text-gray-300 text-gray-900 outline-none border-1 border-gray-500 active:border-blue-500 focus:border-blue-500 transition-colors"
+            />
+          </label>
           <label className="block mb-4">
             Rol:
             <select
