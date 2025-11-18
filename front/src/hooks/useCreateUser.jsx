@@ -25,15 +25,18 @@ const useModalFormCreateUser = () => {
     }));
   }, []);
 
-  const handleCreateUser = useCallback(async () => {
-    try {
-      await Register(user.userName, user.email, user.role);
-      // Opcional: Volver a resetear el formulario si el registro es exitoso
-      setUser({ userName: "", email: "", role: "user" });
-    } catch (error) {
-      console.error("Error creating user:", error);
-    }
-  }, [user]); // 'user' en las dependencias para que use el estado actual al llamar a Register
+  const handleCreateUser = useCallback(
+    async ({ user }) => {
+      try {
+        await Register(user.userName, user.email, user.role);
+        // Opcional: Volver a resetear el formulario si el registro es exitoso
+        setUser({ userName: "", email: "", role: "user" });
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+    },
+    [user]
+  ); // 'user' en las dependencias para que use el estado actual al llamar a Register
 
   return {
     modalU: modal, // Devolvemos el estado

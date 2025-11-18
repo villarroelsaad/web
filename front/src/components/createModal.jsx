@@ -58,7 +58,7 @@ export const ModalFormUser = ({
           <button
             type="button"
             onClick={() => {
-              handleEdit(user.id, user.userName, user.email, user.role);
+              handleEdit(user.userName, user.email, user.role, user.id);
               closeModal();
             }}
             className="bg-blue-500 text-white p-2 rounded"
