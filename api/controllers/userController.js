@@ -40,7 +40,6 @@ export class UserController {
                 role: result.data.role || 'user'
             };
             await UserModel.register({ input: userInput });
-            console.log('User created successfully')
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error' });
         }
@@ -58,9 +57,7 @@ export class UserController {
             }
 
             const { username, password } = result.data;
-            console.log('Login attempt for username:', username);
             const user = await UserModel.findByUsername(username);
-            console.log('User fetched from DB:', user ? { Username_u: user.Username_u, Role_u: user.Role_u } : null);
 
             if (!user) {
                 return res.status(401).json({ error: 'Invalid username or password' });
@@ -68,7 +65,7 @@ export class UserController {
             // Compare the provided password with the hashed password in the database
 
             const isPasswordValid = await bcrypt.compare(password, user.UserPassword_u);
-            console.log('Password match result for', username, ':', isPasswordValid);
+
 
             if (!isPasswordValid) {
                 return res.status(401).json({ error: 'Invalid username or password' });
@@ -111,7 +108,7 @@ export class UserController {
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            await UserModel.deleteUser(id);
+            await UserModel.deleteUser({ id });
             res.status(200).json({ message: 'User deleted successfully' });
         } catch (error) {
             console.error('Error deleting user:', error);
@@ -129,7 +126,8 @@ export class UserController {
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            await UserModel.editUser(id, result.data);
+
+            await UserModel.editUser({ id, input: result.data });
             res.status(200).json({ message: 'User updated successfully' });
         } catch (error) {
             console.error('Error updating user:', error);

@@ -8,12 +8,12 @@ export const DeleteU = async (id) => {
       })
   
       if (!response.ok) {
-        throw new Error(`Error al eliminar enlace: ${response.statusText}`)
+        throw new Error(`Error al eliminar el usuario: ${response.statusText}`)
       }
   
       return true
     } catch (err) {
-      console.error('Erroel al eliminar el enlace:', err)
+      console.error('Erroel al eliminar el usuario:', err)
       throw err
     }
   }
