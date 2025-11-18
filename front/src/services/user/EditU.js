@@ -1,6 +1,6 @@
 export const EditU = async (id, userName, email, role) => {
     try {
-      const response = await fetch(`https://web-ten-pi-26.vercel.app/user/edit/${id}`, {
+      const response = await fetch(`https://web-api-orpin.vercel.app/user/edit/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

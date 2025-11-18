@@ -1,6 +1,6 @@
 export const GetUsers = async () => {
     try {
-        const response = await fetch('https://web-ten-pi-26.vercel.app/user/get', {
+        const response = await fetch('https://web-api-orpin.vercel.app/user/get', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
