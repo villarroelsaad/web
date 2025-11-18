@@ -11,6 +11,7 @@ import { EditU } from "../services/user/EditU";
 import useModalFormUser from "../hooks/useEditUser";
 import useModalFormCreateUser from "../hooks/useCreateUser";
 import { CreateUserModal } from "./CreateUserModal";
+import { ModalFormUser } from "./createModal";
 
 export const Config = () => {
   const [user, setUser] = useState([]);
@@ -34,7 +35,7 @@ export const Config = () => {
     }
   };
   const { modal, userE, openModal, closeModal, handleChange } =
-    useModalFormUser(initialUser);
+    useModalFormUser();
   const {
     openModalU,
     modalU,
@@ -66,7 +67,7 @@ export const Config = () => {
         <div className="w-full flex items-center justify-between">
           <h1 className="text-xl font-semibold">Configuración de usuarios</h1>
           <div>
-            <button onClick={() => openModalU(null)}>Crear usuario</button>
+            <button onClick={() => openModalU()}>Crear usuario</button>
           </div>
         </div>
         {loading && <p>Cargando usuarios...</p>}
@@ -127,7 +128,7 @@ export const Config = () => {
           closeModal={closeModalU}
           handleCreateUser={handleCreateUserU}
         />
-        <ModalForm
+        <ModalFormUser
           user={userE}
           modal={modal}
           handleChange={handleChange}
