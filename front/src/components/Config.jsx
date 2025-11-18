@@ -6,11 +6,11 @@ import {
   HiArchiveBoxXMark,
   HiMiniAdjustmentsHorizontal,
 } from "react-icons/hi2";
-
 import { DeleteU } from "../services/user/DeleteU";
 import { EditU } from "../services/user/EditU";
 import useModalFormUser from "../hooks/useEditUser";
 import useModalFormCreateUser from "../hooks/useCreateUser";
+import { CreateUserModal } from "./CreateUserModal";
 
 export const Config = () => {
   const [user, setUser] = useState([]);
@@ -25,7 +25,7 @@ export const Config = () => {
       DeleteU(id);
     }
   };
-  const handleEditUser = (id, username, email, role) => {
+  const handleEdit = (id, username, email, role) => {
     if (
       window.confirm("¿Estás seguro de que quieres editar este elemento?") ===
       true
@@ -33,8 +33,17 @@ export const Config = () => {
       EditU(id, username, email, role);
     }
   };
-  const { openModal, ModalForm } = useModalFormUser(null, handleEditUser);
-  const { openModalU, ModalFormU } = useModalFormCreateUser();
+  const { modal, userE, openModal, closeModal, handleChange } =
+    useModalFormUser(initialUser);
+  const {
+    openModalU,
+    modalU,
+    userU,
+    handleChangeU,
+    closeModalU,
+    handleCreateUserU,
+  } = useModalFormCreateUser();
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Set loading true before fetch
@@ -111,8 +120,20 @@ export const Config = () => {
             </table>
           )
         )}
-        <ModalFormU></ModalFormU>
-        <ModalForm handleEditUser={handleEditUser} />
+        <CreateUserModal
+          modal={modalU}
+          user={userU}
+          handleChange={handleChangeU}
+          closeModal={closeModalU}
+          handleCreateUser={handleCreateUserU}
+        />
+        <ModalForm
+          user={userE}
+          modal={modal}
+          handleChange={handleChange}
+          closeModal={closeModal}
+          handleEdit={handleEdit} // Pasamos la función de guardado
+        />
         <div className="flex gap-4 mt-5">
           <button className="p-1 rounded">
             <HiChevronLeft size={25} />
