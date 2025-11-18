@@ -5,11 +5,16 @@ import { Register } from "../services/user/Register";
 
 const useModalFormCreateUser = () => {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState({ userName: "", email: "", role: "user" });
+  const [user, setUser] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    role: "user",
+  });
 
   const openModal = useCallback(() => {
     // Opcional: Resetear el formulario al abrir
-    setUser({ userName: "", email: "", role: "user" });
+    setUser({ userName: "", email: "", password: "", role: "user" });
     setModal(true);
   }, []);
 
@@ -26,11 +31,12 @@ const useModalFormCreateUser = () => {
   }, []);
 
   const handleCreateUser = useCallback(
-    async ({ user }) => {
+    async (user) => {
       try {
-        await Register(user.userName, user.email, user.role);
+        const { userName, email, password, role } = user.user;
+        await Register(userName, email, password, role);
         // Opcional: Volver a resetear el formulario si el registro es exitoso
-        setUser({ userName: "", email: "", role: "user" });
+        setUser({ userName: "", email: "", password: "", role: "user" });
       } catch (error) {
         console.error("Error creating user:", error);
       }

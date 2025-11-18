@@ -1,6 +1,6 @@
-export const Register = async (username, email, password, role = 'user') => {
+export const Register = async (username, email, password, role) => {
   try {
-    const response = await fetch('https://web-api-orpin.vercel.app/user/register', {
+    const response = await fetch('https://web-ten-pi-26.vercel.app/user/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password, role }),

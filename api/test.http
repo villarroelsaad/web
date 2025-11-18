@@ -14,7 +14,7 @@ Content-Type: application/json
   "username": "dylan",
   "email": "jdyddd@example.com",
   "password": "12345678",
-  "role": "user"
+  "role": "admin"
 }
 ####
 POST  http://localhost:3000/user/login

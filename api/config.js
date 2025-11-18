@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const allowedOrigins = ['https://web-ten-pi-26.vercel.app']
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'https://web-ten-pi-26.vercel.app']
 export const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {

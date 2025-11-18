@@ -76,6 +76,7 @@ export const Clients = () => {
     <div className="mx-auto bg-white dark:bg-zinc-800 sm:w-3/5 w-full flex-wrap h-full rounded-xl ">
       <section className="flex flex-col flex-wrap gap-10 text-lg text-gray-800 items-center p-6 dark:text-gray-300 dark:shadow-gray-800">
         <h1 className="text-xl font-semibold">Clientes</h1>
+        <button onClick={() => openModal(clients)}>djlaskjdlkas</button>
         {loading && <p>Cargando clientes...</p>}
         {error && <p className="text-red-500">{error}</p>}
 

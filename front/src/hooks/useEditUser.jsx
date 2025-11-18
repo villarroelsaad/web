@@ -6,6 +6,7 @@ const useModalFormUser = (initialuser) => {
 
   const openModal = useCallback((userToEdit) => {
     setUserE(userToEdit);
+
     setModal(true);
   }, []);
 
