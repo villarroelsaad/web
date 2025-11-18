@@ -3,7 +3,8 @@ import z from 'zod';
 const userSchema = z.object({
     username: z.string().min(3).max(27),
     password: z.string().min(8).max(20),
-    email:z.string().email()
+    email: z.string().email(),
+    role: z.string().max(5).optional()
 })
 
 export const validateUser = function (object) {

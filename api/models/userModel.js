@@ -6,7 +6,7 @@ export class UserModel {
         const [userRows] = await connection.execute('SELECT UserID_u, Username_u, Email_u, Role_u FROM Users')
         return userRows
     }
-    static async findByUsername(username) {
+    static async findByUsername({ username }) {
         const [user] = await connection.execute('SELECT UserID_u, Username_u, Email_u, UserPassword_u, Role_u FROM Users WHERE Username_u = ?', [username])
         return user[0]
     }
@@ -33,7 +33,7 @@ export class UserModel {
     }
     static async editUser({ id, input }) {
         const { username, email, role } = input
-        await connection.execute('UPDATE Users SET Username_u = ?, Email_u = ?, Role_u = ? WHERE UserID = ?', [username, email, role, id])
+        await connection.execute('UPDATE Users SET Username_u = ?, Email_u = ?, Role_u = ? WHERE UserID_u = ?', [username, email, role, id])
         return true
     }
 }
