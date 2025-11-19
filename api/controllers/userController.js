@@ -72,8 +72,15 @@ export class UserController {
 
             const { UserPassword_u: _, ...authUser } = user;  // Exclude password from response
 
-            // Create a JWT token and set it in the cookies
-            const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
+            // Create a JWT token that includes the database user id and role so
+            // downstream handlers can authorize without extra lookups.
+            const tokenPayload = {
+                id: user.UserID_u,
+                role: user.Role_u,
+                email: user.Email_u,
+                username: user.Username_u
+            };
+            const token = jwt.sign(tokenPayload, process.env.SECRET, { expiresIn: '1h' });
             // When the frontend and API are on different origins, the cookie must allow cross-site
             // transmission. Use SameSite='none' and Secure in production so the browser will send
             // the cookie with cross-origin requests when `credentials: 'include'` is used.
