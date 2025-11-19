@@ -1,12 +1,11 @@
 import { useState, useCallback } from "react";
 import { Create } from "../services/client/Create";
 
-const useModalFormCreateClient = () => {
+const useModalFormCreateClient = ({ handleReload }) => {
   const [modal, setModal] = useState(false);
   const [client, setclient] = useState({
     name: "",
     email: "",
-
   });
 
   const openModal = useCallback(() => {
@@ -29,15 +28,17 @@ const useModalFormCreateClient = () => {
 
   const handleCreateClient = useCallback(
     async (client) => {
-          try {
-        const { name, email} = client;
+      try {
+        const { name, email } = client;
+
         await Create(name, email);
         alert("Cliente creado correctamente");
+        handleReload();
       } catch (error) {
         console.error("Error creating client:", error);
       }
     },
-    [client]
+    [client, handleReload]
   ); // 'client' en las dependencias para que use el estado actual al llamar a Register
 
   return {
