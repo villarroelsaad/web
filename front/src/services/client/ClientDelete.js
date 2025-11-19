@@ -1,7 +1,7 @@
 export const ClientDelete = async (id) => {
     try {
       const response = await fetch(`https://web-api-orpin.vercel.app/client/delete/${id}`, {
-        method: 'Delete',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }

@@ -70,7 +70,10 @@ export const Config = () => {
         <div className="w-full flex items-center flex-col justify-between">
           <h1 className="text-xl font-semibold">Configuración de usuarios</h1>
           <div className="w-11/12 flex gap-4 mt-10 mb-2 justify-end items-center mr-10">
-            <button onClick={() => openModalU()}>
+            <button
+              className="hover: active:opacity-55"
+              onClick={() => openModalU()}
+            >
               <IoIosAdd size={28} color="#38bdf8" />
             </button>
             <button

@@ -12,12 +12,17 @@ export class ClientModel {
   static async getClientById({ id }) {
         const [Clients] = await connection.execute('SELECT * FROM Clients where id_c = ?', [id]);
         return Clients; // Assuming you want to return the first row of data
-    }
+  }
+  static async createClient({ input }) {
+    const { name, email } = input;
+    const [result] = await connection.execute('INSERT INTO Clients (PayerName_c, PayerEmail_c) VALUES (?, ?)', [name, email]);
+    return { id: result.insertId, name, email };
+  }
       
       // Function to simulate processing a refund
       static async updateClient({id, input}) {
-        const { name, email, role } = input;
-        await connection.execute('UPDATE Clients inner join Sales on Id_c = Id_s SET PayerName_c = ?, PayerEmail_c = ? WHERE Id_c = ?', [name, email, role, id]);
+        const { name, email } = input;
+        await connection.execute('UPDATE Clients SET PayerName_c = ?, PayerEmail_c = ? WHERE Id_c = ?', [name, email, id]);
         return true; 
     }
     

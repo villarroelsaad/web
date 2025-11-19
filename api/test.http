@@ -1,7 +1,7 @@
 
 
 ###recuperar links
-GET  http://localhost:3000/user/get
+GET  http://localhost:3000/client/get
 ###
 ###recuperar 
 GET  http://localhost:3000/sale/get
@@ -16,6 +16,25 @@ Content-Type: application/json
   "password": "12345678",
   "role": "admin"
 }
+
+####
+POST  http://localhost:3000/client/create
+Content-Type: application/json
+
+{
+  "name": "dylan",
+  "email": "jdyddd@example.com"
+
+}
+####
+PUT   http://localhost:3000/client/edit/1
+Content-Type: application/json
+
+{
+  "name": "dylan",
+  "email": "jdydd@example.com"
+
+}
 ####
 POST  http://localhost:3000/user/login
 Content-Type: application/json
@@ -24,6 +43,9 @@ Content-Type: application/json
   "username": "dylan",
   "password": "12345678"
 }
+###
+DELETE http://localhost:3000/client/delete/
+
 ###
 DELETE http://localhost:3000/user/delete/6
 
