@@ -43,7 +43,7 @@ export const ModalFormClient = ({
         <div className="flex justify-end gap-2">
           <button
             type="button"
-                      onClick={() => {
+            onClick={() => {
               handleCreateClient(client);
               closeModal();
             }}
