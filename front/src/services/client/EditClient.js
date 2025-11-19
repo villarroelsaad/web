@@ -1,11 +1,11 @@
-export const EditClient = async (id, username, email) => {
+export const EditClient = async (id, name, email) => {
     try {
       const response = await fetch(`https://web-api-orpin.vercel.app/client/edit/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email })
+        body: JSON.stringify({ name, email })
       })
   
       if (!response.ok) {

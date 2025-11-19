@@ -1,5 +1,3 @@
-// useModalFormCreateUser.js
-
 import { useState, useCallback } from "react";
 import { Register } from "../services/user/Register";
 

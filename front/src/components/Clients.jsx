@@ -4,16 +4,21 @@ import {
   HiArchiveBoxXMark,
   HiMiniPencilSquare,
 } from "react-icons/hi2";
+import { IoIosAdd, IoIosRefresh } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { getClients } from "../services/client/Clients";
 import { ClientDelete } from "../services/client/ClientDelete";
-import useModalForm from "../hooks/useEditClient";
 import { EditClient } from "../services/client/EditClient";
+import { ModalFormClient } from "./ClientModal";
+import useModalFormCreateClient from "../hooks/useCreateClient";
+import { ModalFormEditClient } from "./EditClientModal";
+import useModalFormClient from "../hooks/useEditClient";
 
 export const Clients = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState(null); // Add error state
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +26,6 @@ export const Clients = () => {
       setError(null); // Clear previous errors
       try {
         const data = await getClients();
-        console.log(data);
         setClients(data);
       } catch (err) {
         console.error("Failed to fetch clients:", err); // Use console.error
@@ -31,13 +35,23 @@ export const Clients = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [reload]);
+
+  const {
+    openModalC,
+    modalC,
+    client,
+    handleChangeC,
+    closeModalC,
+    handleCreateClient,
+  } = useModalFormCreateClient();
+
+  const { modalE, clientE, openModalE, closeModalE, handleChangeE } =
+    useModalFormClient();
 
   const handleEditClient = async (id, name, email) => {
     try {
-      console.log(id, name, email);
       await EditClient(id, name, email); // Assuming EditClient handles API call
-
       // Update the client in the local state
       setClients((prevClients) =>
         prevClients.map((client) =>
@@ -52,7 +66,7 @@ export const Clients = () => {
   };
 
   // Pass handleEditClient to useModalForm as the callback for when the form is submitted
-  const { openModal, ModalForm } = useModalForm(null, handleEditClient); // Ensure openModal receives the client object
+  // Ensure openModal receives the client object
 
   const handleEliminate = async (id) => {
     if (
@@ -74,9 +88,23 @@ export const Clients = () => {
 
   return (
     <div className="mx-auto bg-white dark:bg-zinc-800 sm:w-3/5 w-full flex-wrap h-full rounded-xl ">
-      <section className="flex flex-col flex-wrap gap-10 text-lg text-gray-800 items-center p-6 dark:text-gray-300 dark:shadow-gray-800">
+      <section className="flex flex-col flex-wrap  text-lg text-gray-800 items-center p-6 dark:text-gray-300 dark:shadow-gray-800">
         <h1 className="text-xl font-semibold">Clientes</h1>
-        <button onClick={() => openModal(clients)}>djlaskjdlkas</button>
+
+        <div className="w-11/12 flex gap-4 mt-10 mb-2 justify-end items-center mr-10">
+          <button
+            className="hover: active:opacity-55"
+            onClick={() => openModalC()}
+          >
+            <IoIosAdd size={28} color="#38bdf8" />
+          </button>
+          <button
+            className="hover: active:opacity-55"
+            onClick={() => setReload(!reload)}
+          >
+            <IoIosRefresh size={20} color="#38bdf8" />
+          </button>
+        </div>
         {loading && <p>Cargando clientes...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
@@ -103,7 +131,7 @@ export const Clients = () => {
                     <td className="w-1/3 h-12">{client.email}</td>
                     <td className="flex h-12 justify-center gap-1">
                       <button
-                        onClick={() => openModal(client)} // Correct way to pass client to openModal
+                        onClick={() => openModalE(client)} // Correct way to pass client to openModal
                         className="bg-transparent  hover:opacity-70 transition-all py-1 px-1 rounded-md"
                       >
                         <HiMiniPencilSquare size={22} color="#38bdf8" />
@@ -121,7 +149,21 @@ export const Clients = () => {
             </table>
           )
         )}
-        <ModalForm handleEditClient={handleEditClient} />
+        <ModalFormClient
+          modal={modalC}
+          client={client}
+          handleChange={handleChangeC}
+          closeModal={closeModalC}
+          handleCreateClient={handleCreateClient}
+        />
+
+        <ModalFormEditClient
+          handleEditClient={handleEditClient}
+          modal={modalE}
+          client={clientE}
+          handleChange={handleChangeE}
+          closeModal={closeModalE}
+        />
 
         <div className="flex gap-4 mt-5">
           <button className="p-1 rounded">

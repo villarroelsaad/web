@@ -4,6 +4,7 @@ import { ClientsController } from "../controllers/clientController.js";
 export const routerClient = Router();
 
 routerClient.get('/get', ClientsController.getClients);
-routerClient.get('/delete/:id', ClientsController.deleteClient);
-routerClient.post('/edit', ClientsController.editClient);
+routerClient.delete('/delete/:id', ClientsController.deleteClient);
+routerClient.put('/edit/:id', ClientsController.editClient);
 
+routerClient.post('/create', ClientsController.createClient);
