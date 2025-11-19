@@ -3,7 +3,14 @@ import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'https://web-ten-pi-26.vercel.app']
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://web-ten-pi-26.vercel.app',
+  // Add the deployed frontend origin used in the project so cross-origin requests
+  // from the UI can send cookies and be accepted by the API.
+  'https://web-api-orpin.vercel.app'
+]
 export const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {

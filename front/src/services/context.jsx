@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 // Clave para almacenar en localStorage
-const LOCAL_STORAGE_KEY = "userAuth";
+export const LOCAL_STORAGE_KEY = "userAuth";
 
 // Crea el contexto
 const UserContext = createContext();
