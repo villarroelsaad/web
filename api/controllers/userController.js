@@ -74,7 +74,16 @@ export class UserController {
 
             // Create a JWT token and set it in the cookies
             const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: '1h' });
-            res.cookie('access_token', token, { httpOnly: true });
+            // When the frontend and API are on different origins, the cookie must allow cross-site
+            // transmission. Use SameSite='none' and Secure in production so the browser will send
+            // the cookie with cross-origin requests when `credentials: 'include'` is used.
+            res.cookie('access_token', token, {
+                httpOnly: true,
+                sameSite: 'none',
+                secure: process.env.NODE_ENV === 'production',
+                path: '/',
+                maxAge: 1000 * 60 * 60 // 1 hour
+            });
 
             return res.status(200).json({ message: 'Login successful', authUser });
         } catch (error) {
