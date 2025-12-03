@@ -29,26 +29,19 @@ export const Panel = () => {
     load();
   }, []);
 
-  const handlePublish = async () => {
-    if (!text || !text.trim()) return;
-    if (!canPublish) {
-      setError("No autorizado para publicar");
-      return;
-    }
-    setLoading(true);
-    try {
-      await createPublish(text.trim());
-      const data = await getPublishes();
-      setAnnouncements((d) => [...d, data]);
-      setText("");
-    } catch (err) {
-      console.error(err);
-      setError("No se pudo publicar");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const handlePublish = async () => {
+  setLoading(true);
+  try {
+    const newAnnouncement = await createPublish(text.trim());
+    setAnnouncements((d) => [newAnnouncement, ...d]);
+    setText("");
+  } catch (err) {
+    console.error(err);
+    setError("No se pudo crear el anuncio");
+  } finally {
+    setLoading(false);
+  }
+};
   const handleDelete = async (id) => {
     if (!confirm("¿Eliminar este anuncio?")) return;
     setLoading(true);

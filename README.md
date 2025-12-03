@@ -1,5 +1,6 @@
 # SISTEM - Paypal IPN Aplicación 
 
+El proyecto consisten en una app de gestion de ventas que conecta con la api de paypal para hacer un seguimiento de las compras y clientes cuenta con roles de usuario y un panel de publicacion 
 Este repositorio contiene una aplicación con dos partes principales: la API (backend) y el frontend (cliente) desarrollados con Node.js, Express y Vite + React.
 
 **Estructura del proyecto**
