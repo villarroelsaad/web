@@ -50,8 +50,9 @@ export class PublishController {
 				return res.status(400).json({ error: "Missing publish text" });
 			}
 
-			await PublishModel.create({ input: { publish, userId: sessionUserId } });
-			return res.status(201).json({ message: "Publish saved" });
+			const created = await PublishModel.create({ input: { publish, userId: sessionUserId } });
+			if (!created) return res.status(500).json({ error: "Failed to save publish" });
+			return res.status(201).json(created);
 		} catch (error) {
 			console.error("Error creating publish:", error);
 			return res.status(500).json({ error: "Internal server error" });
