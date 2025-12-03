@@ -34,11 +34,14 @@ const handlePublish = async () => {
   if (!trimmed) return;
   setLoading(true);
   try {
-    // The API returns only a status message, so fetch the updated list
-    await createPublish(trimmed);
-    const data = await getPublishes();
-    setAnnouncements(data);
-    setText("");
+    // The API now returns the created publish object — insert it directly
+    const created = await createPublish(trimmed);
+    if (created) {
+      setAnnouncements((d) => [created, ...d]);
+      setText("");
+    } else {
+      setError("No se pudo crear el anuncio");
+    }
   } catch (err) {
     console.error(err);
     setError("No se pudo crear el anuncio");
