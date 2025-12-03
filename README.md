@@ -1,4 +1,4 @@
-# SISTEM - Paypal IPN Aplicación (Frontend + API)
+# SISTEM - Paypal IPN Aplicación 
 
 Este repositorio contiene una aplicación con dos partes principales: la API (backend) y el frontend (cliente) desarrollados con Node.js, Express y Vite + React.
 
