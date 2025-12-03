@@ -30,10 +30,14 @@ export const Panel = () => {
   }, []);
 
 const handlePublish = async () => {
+  const trimmed = text.trim();
+  if (!trimmed) return;
   setLoading(true);
   try {
-    const newAnnouncement = await createPublish(text.trim());
-    setAnnouncements((d) => [newAnnouncement, ...d]);
+    // The API returns only a status message, so fetch the updated list
+    await createPublish(trimmed);
+    const data = await getPublishes();
+    setAnnouncements(data);
     setText("");
   } catch (err) {
     console.error(err);
