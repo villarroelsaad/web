@@ -11,8 +11,8 @@ POST  http://localhost:3000/user/register
 Content-Type: application/json
 
 {
-  "username": "dylan",
-  "email": "jdyddd@example.com",
+  "username": "test",
+  "email": "jdydd@example.com",
   "password": "12345678",
   "role": "admin"
 }
@@ -22,7 +22,7 @@ POST  http://localhost:3000/client/create
 Content-Type: application/json
 
 {
-  "name": "dylan",
+  "name": "test",
   "email": "jdyddd@example.com"
 
 }

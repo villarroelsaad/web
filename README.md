@@ -1,7 +1,12 @@
 # SISTEM - Paypal IPN Aplicación 
 
 El proyecto consisten en una app de gestion de ventas que conecta con la api de paypal para hacer un seguimiento de las compras y clientes cuenta con roles de usuario y un panel de publicacion 
+
 Este repositorio contiene una aplicación con dos partes principales: la API (backend) y el frontend (cliente) desarrollados con Node.js, Express y Vite + React.
+Para ejecutar en la web ir a https://web-ten-pi-26.vercel.app/ con las credenciales de prueba
+
+user: test
+passsword: 12345678
 
 **Estructura del proyecto**
 - **`api/`**: Servidor Express (entrada: `app.js`). Conexión a base de datos MySQL y autenticación por token.
@@ -28,7 +33,6 @@ cd front
 npm install
 npm run dev
 ```
-
 Notas rápidas:
 - El backend escucha por defecto en el puerto `3000` (ver `api/app.js`).
 - Vite suele arrancar en `http://localhost:5173`.
