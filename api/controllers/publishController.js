@@ -86,9 +86,9 @@ export class PublishController {
 	static async getByUser(req, res) {
 		try {
 			const { userId } = req.params;
-			const publish = await PublishModel.getByUserId(userId);
-			if (!publish) return res.status(404).json({ message: "No publish found for user" });
-			return res.status(200).json(publish);
+			const publishes = await PublishModel.getByUserId(userId);
+			if (!publishes || publishes.length === 0) return res.status(404).json({ message: "No publish found for user" });
+			return res.status(200).json(publishes);
 		} catch (error) {
 			console.error("Error fetching publish by user:", error);
 			return res.status(500).json({ error: "Internal server error" });
