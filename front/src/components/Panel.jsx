@@ -39,7 +39,7 @@ export const Panel = () => {
     try {
       await createPublish(text.trim());
       const data = await getPublishes();
-      setAnnouncements(data);
+      setAnnouncements((d) => [...d, data]);
       setText("");
     } catch (err) {
       console.error(err);
